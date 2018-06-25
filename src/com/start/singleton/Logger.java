@@ -32,6 +32,10 @@ public class Logger {
     }
 
     public void printGraph(boolean[][] graphMatrix) {
+        if (quiet) {
+            return;
+        }
+
         System.out.println("Graph representation: ");
         for (boolean[] matrixLine : graphMatrix) {
             for (boolean matrixValue : matrixLine) {

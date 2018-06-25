@@ -25,16 +25,14 @@ public class Main {
     private static void readCommands(CommandLine commandLine) {
         if (commandLine.hasOption(InputLineOptions.QUIET_MODE.getOption())) {
             logger.setQuietMode(true);
-            logger.log("Quiet mode");
         }
-
 
         GraphGenerator graphGenerator = GraphGenerator.getInstance();
         if (commandLine.hasOption(InputLineOptions.READ_SIZE.getOption())) {
             logger.printGraph(
                     graphGenerator
                             .generateGraph(
-                                    Integer.valueOf(commandLine.getOptionValue(InputLineOptions.READ_SIZE.getOption()))
+                                    Integer.parseInt(commandLine.getOptionValue(InputLineOptions.READ_SIZE.getOption()))
                             )
             );
         } else if (commandLine.hasOption(InputLineOptions.READ_FROM_FILE.getOption())) {
