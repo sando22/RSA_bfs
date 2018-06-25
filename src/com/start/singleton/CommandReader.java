@@ -1,7 +1,7 @@
 package com.start.singleton;
 
 import com.start.Constants;
-import com.start.InputLineOptions;
+import com.start.helper.InputLineOptions;
 import org.apache.commons.cli.*;
 
 public class CommandReader {

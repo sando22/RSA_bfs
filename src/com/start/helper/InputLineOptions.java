@@ -1,4 +1,4 @@
-package com.start;
+package com.start.helper;
 
 public enum InputLineOptions {
     // todo use different random methods for edge generating
