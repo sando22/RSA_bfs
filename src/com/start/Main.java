@@ -23,6 +23,10 @@ public class Main {
     }
 
     private static void readCommands(CommandLine commandLine) {
+        if (commandLine.hasOption(InputLineOptions.WRITE_TO_FILE.getOption())) {
+            logger.outputToFile(commandLine.getOptionValue(InputLineOptions.WRITE_TO_FILE.getOption()));
+        }
+
         if (commandLine.hasOption(InputLineOptions.QUIET_MODE.getOption())) {
             logger.setQuietMode(true);
         }
