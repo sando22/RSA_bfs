@@ -16,6 +16,7 @@ public class Constants {
         public static final String NODE_GRAPH_GENERATING = "Generating graph with given nodes ";
         public static final String FILE_GRAPH_GENERATING = "Generating graph from given file ";
 
+        public static final String GRAPH_GENERATION_TIME = "Graph generation execution time (millis): ";
         public static final String GRAPH_GENERATED = "Graph generated";
         public static final String GRAPH_TRAVERSAL_STARTED = "Graph traversal started";
 

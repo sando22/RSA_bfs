@@ -68,6 +68,7 @@ public class Main {
             int numberOfThreads = Integer.parseInt(commandLine.getOptionValue(InputLineOptions.THREADS_TO_USE.getOption()));
 
             AsyncWorker.createInstance(numberOfThreads);
+            GraphGenerator.createInstance(numberOfThreads);
             threadsUsed = numberOfThreads;
         } else {
             AsyncWorker.createInstance(Constants.DEFAULT_NUMBER_OF_THREADS);
