@@ -108,11 +108,11 @@ public class AsyncWorker {
                 visit(neighbours);
             }
 
+            logger.logVerbose(String.format(Constants.Messages.THREAD_STOPPED, Thread.currentThread().getId()));
             logger.logVerbose(
                     String.format(Constants.Messages.THREADS_EXECUTION_TIME, Thread.currentThread().getId())
                             + (new Date().getTime() - startTime.getTime())
             );
-            logger.logVerbose(String.format(Constants.Messages.THREAD_STOPPED, Thread.currentThread().getId()));
             return null;
         }
     }

@@ -72,6 +72,7 @@ public class Main {
             threadsUsed = numberOfThreads;
         } else {
             AsyncWorker.createInstance(Constants.DEFAULT_NUMBER_OF_THREADS);
+            GraphGenerator.createInstance(Constants.DEFAULT_NUMBER_OF_THREADS);
             threadsUsed = Constants.DEFAULT_NUMBER_OF_THREADS;
         }
     }
