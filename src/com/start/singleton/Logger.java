@@ -7,6 +7,7 @@ import java.io.PrintStream;
 public class Logger {
     private static final Logger instance = new Logger();
     private boolean quiet;
+    private boolean debug;
     private PrintStream output;
 
     private Logger() {
@@ -19,6 +20,10 @@ public class Logger {
 
     public void setQuietMode(boolean enabled) {
         quiet = enabled;
+    }
+
+    public void setDebugMode(boolean enabled) {
+        debug = enabled;
     }
 
     public void outputToFile(String fileName) {
@@ -35,6 +40,12 @@ public class Logger {
         }
     }
 
+    public void logDebug(String... messages) {
+        if (debug) {
+            log(messages);
+        }
+    }
+
     public void log(String... messages) {
         String outputString = "";
 
@@ -46,7 +57,7 @@ public class Logger {
     }
 
     public void printGraph(boolean[][] graphMatrix) {
-        if (quiet) {
+        if (quiet || !debug) {
             return;
         }
 

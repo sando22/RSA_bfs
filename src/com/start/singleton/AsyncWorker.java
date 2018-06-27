@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class AsyncWorker {
     private static AsyncWorker instance;
@@ -32,7 +33,7 @@ public class AsyncWorker {
     }
 
     public void traverseGraph(boolean[][] graph) {
-        logger.log("Start traversing");
+        logger.logVerbose(Constants.Messages.GRAPH_TRAVERSAL_STARTED);
 
         List<Integer> visited = new ArrayList<>();
         List<Callable<Void>> workers = new ArrayList<>();
@@ -41,15 +42,15 @@ public class AsyncWorker {
             workers.add(new Traverse(visited, graph, i));
         }
 
-        logger.logVerbose("start");
         Date startTime = new Date();
         try {
             executorService.invokeAll(workers);
             executorService.shutdown();
+            executorService.awaitTermination(30, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        logger.log("Finished executing after " + (new Date().getTime() - startTime.getTime()) + "ms");
+        logger.log(Constants.Messages.GRAPH_TRAVERSAL_TIME + (new Date().getTime() - startTime.getTime()));
     }
 
     private class Traverse implements Callable<Void> {
@@ -57,6 +58,7 @@ public class AsyncWorker {
         Queue<Integer> queue;
         private boolean[][] graph;
         private int line;
+        private Date startTime;
 
         public Traverse(List<Integer> visited, boolean[][] graph, int line) {
             this.visited = visited;
@@ -70,9 +72,7 @@ public class AsyncWorker {
             if (!visited.contains(startNode)) {
                 visited.add(startNode);
                 queue.add(startNode);
-                logger.logVerbose("Visiting " + startNode + " from " + Thread.currentThread().getName());
-            } else {
-                logger.logVerbose("Skipping " + startNode + " from " + Thread.currentThread().getName());
+                logger.logDebug("Visiting " + startNode + " from " + Thread.currentThread().getId());
             }
         }
 
@@ -82,13 +82,16 @@ public class AsyncWorker {
                 if (!visited.contains(neighbour)) {
                     visited.add(neighbour);
                     queue.add(neighbour);
-                    logger.logVerbose("Visiting " + neighbour + " from " + Thread.currentThread().getName());
+                    logger.logDebug("Visiting " + neighbour + " from " + Thread.currentThread().getId());
                 }
             }
         }
 
         @Override
         public Void call() {
+            startTime = new Date();
+            logger.logVerbose(String.format(Constants.Messages.THREAD_STARTED, Thread.currentThread().getId()));
+
             visit(line);
 
             while (!queue.isEmpty()) {
@@ -105,6 +108,11 @@ public class AsyncWorker {
                 visit(neighbours);
             }
 
+            logger.logVerbose(
+                    String.format(Constants.Messages.THREADS_EXECUTION_TIME, Thread.currentThread().getId())
+                            + (new Date().getTime() - startTime.getTime())
+            );
+            logger.logVerbose(String.format(Constants.Messages.THREAD_STOPPED, Thread.currentThread().getId()));
             return null;
         }
     }

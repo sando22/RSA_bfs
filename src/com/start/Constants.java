@@ -12,8 +12,20 @@ public class Constants {
 
     public static class Messages {
         public static final String WELCOME = "BFS project started";
+
         public static final String NODE_GRAPH_GENERATING = "Generating graph with given nodes ";
         public static final String FILE_GRAPH_GENERATING = "Generating graph from given file ";
+
         public static final String GRAPH_GENERATED = "Graph generated";
+        public static final String GRAPH_TRAVERSAL_STARTED = "Graph traversal started";
+
+        public static final String THREAD_STARTED = "Thread-%s started.";
+        public static final String THREAD_STOPPED = "Thread-%s stopped. ";
+        public static final String THREADS_EXECUTION_TIME = "Thread-%s execution time was (millis): ";
+
+        public static final String THREADS_USED = "Threads used in current run: ";
+
+        public static final String TOTAL_EXECUTION_TIME = "Total execution time for current run (millis): ";
+        public static final String GRAPH_TRAVERSAL_TIME = "Graph traversal execution time (millis): ";
     }
 }

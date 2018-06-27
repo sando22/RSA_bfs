@@ -7,7 +7,8 @@ public enum InputLineOptions {
     READ_FROM_FILE("i", true, "read graph from file"),
     WRITE_TO_FILE("o", true, "writes output of the program to file"),
     THREADS_TO_USE("t", true, "specify the number of threads to use for the algorithm"),
-    QUIET_MODE("q", false, "print only the primary objectives");
+    QUIET_MODE("q", false, "print only the primary objectives"),
+    DEBUG_MODE("d", false, "print debug logs");
 
     private String option;
     private boolean hasArguments;
