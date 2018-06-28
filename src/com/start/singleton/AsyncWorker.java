@@ -90,7 +90,7 @@ public class AsyncWorker {
         @Override
         public Void call() {
             startTime = new Date();
-            logger.logVerbose(String.format(Constants.Messages.THREAD_STARTED, Thread.currentThread().getId()));
+            logger.logDebug(String.format(Constants.Messages.THREAD_STARTED, Thread.currentThread().getId()));
 
             visit(line);
 
@@ -108,8 +108,8 @@ public class AsyncWorker {
                 visit(neighbours);
             }
 
-            logger.logVerbose(String.format(Constants.Messages.THREAD_STOPPED, Thread.currentThread().getId()));
-            logger.logVerbose(
+            logger.logDebug(String.format(Constants.Messages.THREAD_STOPPED, Thread.currentThread().getId()));
+            logger.logDebug(
                     String.format(Constants.Messages.THREADS_EXECUTION_TIME, Thread.currentThread().getId())
                             + (new Date().getTime() - startTime.getTime())
             );
